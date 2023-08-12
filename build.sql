@@ -26,13 +26,13 @@ CREATE TABLE Status(
 );
 
 CREATE TABLE Projects (
-  ProjectID INT PRIMARY KEY AUTO_INCREMENT,
-  ProjectName VARCHAR(255),
-  Description TEXT,
-  StartDate DATE,
-  EndDate DATE,
-  CreatorID INT,
-  StatusID INT
+  	ProjectID INT PRIMARY KEY AUTO_INCREMENT,
+  	ProjectName VARCHAR(255),
+  	Description TEXT,
+  	StartDate DATE,
+  	EndDate DATE,
+  	CreatorID INT,
+  	StatusID INT
 );
 
 CREATE TABLE ProjectUsers(
