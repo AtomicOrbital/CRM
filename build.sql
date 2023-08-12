@@ -54,17 +54,41 @@ CREATE TABLE Tasks(
     index idx_status (StatusID)
 );
 
+CREATE TABLE UserTasks (
+	UserID int,
+	TaskID int,
+	primary key(UserID, TaskID)
+);
+
+CREATE TABLE ProjectStatusHistory(
+	ProjectID int,
+	StatusID int,
+	Timestamp datetime default current_timestamp,
+	primary key(ProjectID, StatusID, Timestamp)
+);
+
+CREATE TABLE TaskStatusHistory(
+	TaskID int,
+	StatusID int,
+	Timestamp datetime default current_timestamp,
+	primary key(TaskID, StatusID, Timestamp)
+);
+
 ALTER TABLE Users ADD FOREIGN KEY(RoleID) REFERENCES Roles(RoleID);
 
 ALTER TABLE Projects ADD FOREIGN KEY(CreatorID) REFERENCES Users(UserID);
-ALTER TABLE Projects ADD FOREIGN KEY(StatusID) REFERENCES Status(StatusID);
+ALTER TABLE ProjectStatusHistory ADD FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID);
+ALTER TABLE ProjectStatusHistory ADD FOREIGN KEY(StatusID) REFERENCES Status(StatusID);
 
 ALTER TABLE ProjectUsers add foreign key(ProjectID) references Projects(ProjectID);
 ALTER TABLE ProjectUsers add foreign key(UserID) references Users(UserID);
 
-ALTER TABLE Tasks ADD FOREIGN KEY(ExecutorID) REFERENCES Users(UserID);
+ALTER TABLE UserTasks ADD FOREIGN KEY(UserID) REFERENCES Users(UserID);
+ALTER TABLE UserTasks ADD FOREIGN KEY(TaskID) REFERENCES Tasks(TaskID);
+
 ALTER TABLE Tasks ADD FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID);
-ALTER TABLE Tasks ADD FOREIGN KEY(StatusID) REFERENCES Status(StatusID);
+ALTER TABLE TaskStatusHistory ADD FOREIGN KEY(TaskID) REFERENCES Tasks(TaskID);
+ALTER TABLE TaskStatusHistory ADD FOREIGN KEY(StatusID) REFERENCES Status(StatusID);
 
 
 INSERT INTO Users(email, password) VALUES ("username@gmail.com", "12345678");
