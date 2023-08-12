@@ -19,13 +19,21 @@
 				<div class="p-4 border mt-4">
 					<form action="${pageContext.request.contextPath}/login" method="POST">
 						<div class="form-group">
-							<label>Email</label> <input type="email" class="form-control"
-								name="email" required="required">
+							<label>Email</label> 
+							<input type="email" class="form-control" name="email" required="required">
 						</div>
 						<div class="form-group">
-							<label>Mật khẩu</label> <input type="password"
-								class="form-control" name="password" required="required">
+							<label>Mật khẩu</label> 
+							<input type="password" class="form-control" name="password" required="required">
 						</div>
+						<%
+							String error = request.getParameter("error");
+							if("true".equals(error)) {
+						%>
+							<p style="color:red;">Email or password incorrect</p>
+						<%
+							}
+						%>
 						<button type="submit" class="btn btn-primary">ĐĂNG NHẬP</button>
 					</form>
 				</div>

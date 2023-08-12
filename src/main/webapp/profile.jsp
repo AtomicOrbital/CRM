@@ -71,10 +71,10 @@
                                 <b class="hidden-xs">Cybersoft</b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="profile.html">ThÃ´ng tin cÃ¡ nhÃ¢n</a></li>
-                                <li><a href="#">Thá»ng kÃª cÃ´ng viá»c</a></li>
+                                <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                <li><a href="#">Thống kê công việc</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">ÄÄng xuáº¥t</a></li>
+                                <li><a href="#">Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>
@@ -94,19 +94,19 @@
                     </li>
                     <li>
                         <a href="user-table.html" class="waves-effect"><i class="fa fa-user fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">ThÃ nh viÃªn</span></a>
+                                aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
                         <a href="role-table.html" class="waves-effect"><i class="fa fa-modx fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Quyá»n</span></a>
+                                aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
                         <a href="groupwork.html" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Dá»± Ã¡n</span></a>
+                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
                     </li>
                     <li>
                         <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">CÃ´ng viá»c</span></a>
+                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
                         <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
@@ -125,7 +125,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Chi tiáº¿t thÃ nh viÃªn</h4>
+                        <h4 class="page-title">Chi tiết thành viên</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -138,7 +138,7 @@
                                     <div class="user-content">
                                         <a href="javascript:void(0)"><img src="plugins/images/users/genu.jpg"
                                                 class="thumb-lg img-circle" alt="img"></a>
-                                        <h4 class="text-white">Nguyá»n VÄn TÃ¨o</h4>
+                                        <h4 class="text-white">Nguyễn Văn Tèo</h4>
                                         <h5 class="text-white">info.teo@gmail.com</h5>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="col-xs-12">
                                             <i data-icon="E" class="linea-icon linea-basic"></i>
-                                            <h5 class="text-muted vb text-center">CHÆ¯A Báº®T Äáº¦U</h5>
+                                            <h5 class="text-muted vb text-center">CHƯA BẮT ĐẦU</h5>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="progress">
@@ -180,7 +180,7 @@
                                         </div>
                                         <div class="col-xs-12">
                                             <i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
-                                            <h5 class="text-muted vb text-center">ÄANG THá»°C HIá»N</h5>
+                                            <h5 class="text-muted vb text-center">TRẠNG THÁI HOÀN THÀNH</h5>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="progress">
@@ -202,7 +202,7 @@
                                         </div>
                                         <div class="col-xs-12">
                                             <i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
-                                            <h5 class="text-muted vb text-center">HOÃN THÃNH</h5>
+                                            <h5 class="text-muted vb text-center">HOÀN THÀNH</h5>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="progress">
@@ -222,7 +222,7 @@
                 </div><br />
                 <!-- /.row -->
                 <!-- BEGIN DANH SÃCH CÃNG VIá»C -->
-                <h4>DANH SÃCH CÃNG VIá»C</h4>
+                <h4>DANH SÁCH CÔNG VIỆC</h4>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
@@ -231,35 +231,35 @@
                                     <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>TÃªn CÃ´ng Viá»c</th>
-                                            <th>Dá»± Ãn</th>
-                                            <th>NgÃ y Báº¯t Äáº§u</th>
-                                            <th>NgÃ y Káº¿t ThÃºc</th>
-                                            <th>Tráº¡ng ThÃ¡i</th>
-                                            <th>HÃ nh Äá»ng</th>
+                                            <th>Tên công việc</th>
+                                            <th>Dự án</th>
+                                            <th>Ngày Bắt Đầu</th>
+                                            <th>Ngày Kết Thúc</th>
+                                            <th>Trạng Thái</th>
+                                            <th>Hành Động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>PhÃ¢n tÃ­ch dá»± Ã¡n</td>
-                                            <td>Dá»± Ã¡n CRM</td>
+                                            <td>Phân tích dự án</td>
+                                            <td>Dự án CRM</td>
                                             <td>22/05/2019</td>
                                             <td>30/05/2019</td>
-                                            <td>ÄÃ£ hoÃ n thÃ nh</td>
+                                            <td>Hoàn thành</td>
                                             <td>
-                                                <a href="profile-edit.html" class="btn btn-sm btn-primary">Cáº­p nháº­t</a>
+                                                <a href="profile-edit.html" class="btn btn-sm btn-primary">Cập nhật</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>Thiáº¿t káº¿ database</td>
-                                            <td>Dá»± Ã¡n CRM</td>
+                                            <td>Thiết kế database</td>
+                                            <td>Dự án CRM</td>
                                             <td>22/05/2019</td>
                                             <td>30/05/2019</td>
-                                            <td>Äang thá»±c hiá»n</td>
+                                            <td>Hoàn thành</td>
                                             <td>
-                                                <a href="profile-edit.html" class="btn btn-sm btn-primary">Cáº­p nháº­t</a>
+                                                <a href="profile-edit.html" class="btn btn-sm btn-primary">Cập nhật</a>
                                             </td>
                                         </tr>
                                     </tbody>

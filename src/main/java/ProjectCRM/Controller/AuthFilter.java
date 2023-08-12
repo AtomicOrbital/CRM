@@ -24,7 +24,7 @@ public class AuthFilter extends HttpFilter {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("user")) {
+				if (cookie.getName().equals("userEmail")) {
 					chain.doFilter(request, response); // User đã đăng nhập, cho phép truy cập
 					return;
 				}

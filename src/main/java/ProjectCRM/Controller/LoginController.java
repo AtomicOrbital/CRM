@@ -1,6 +1,7 @@
 package ProjectCRM.Controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -30,12 +31,20 @@ public class LoginController extends HttpServlet {
 		try {
 			User user = UserDAO.checkLogin(email, password);
 			if(user != null) {
-				Cookie loginCookie = new Cookie("user", user.getEmail());
-				loginCookie.setMaxAge(60*60);
-				response.addCookie(loginCookie);
+				String encodeEmail = URLEncoder.encode(user.getEmail(), "UTF-8");
+				String encodePassword = URLEncoder.encode(user.getPassword(), "UTF-8");
+				
+				Cookie emailCookie = new Cookie("userEmail", encodeEmail);
+				Cookie passwordCookie = new Cookie("userPassword", encodePassword);
+				
+				emailCookie.setMaxAge(60*60);
+				passwordCookie.setMaxAge(60*60);
+				// thêm cookie vào phản hồi
+				response.addCookie(emailCookie);
+				response.addCookie(passwordCookie);
 				response.sendRedirect("profile.jsp");
 			} else {
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("login.jsp?error=true");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
