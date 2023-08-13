@@ -26,13 +26,13 @@ CREATE TABLE Status(
 );
 
 CREATE TABLE Projects (
-  	ProjectID INT PRIMARY KEY AUTO_INCREMENT,
-  	ProjectName VARCHAR(255),
-  	Description TEXT,
-  	StartDate DATE,
-  	EndDate DATE,
-  	CreatorID INT,
-  	StatusID INT
+  ProjectID INT PRIMARY KEY AUTO_INCREMENT,
+  ProjectName VARCHAR(255),
+  Description TEXT,
+  StartDate DATE,
+  EndDate DATE,
+  CreatorID INT,
+  StatusID INT
 );
 
 CREATE TABLE ProjectUsers(
@@ -76,7 +76,7 @@ CREATE TABLE TaskStatusHistory(
 
 ALTER TABLE Users ADD FOREIGN KEY(RoleID) REFERENCES Roles(RoleID);
 
-ALTER TABLE Projects ADD FOREIGN KEY(CreatorID) REFERENCES Users(UserID);
+
 ALTER TABLE ProjectStatusHistory ADD FOREIGN KEY(ProjectID) REFERENCES Projects(ProjectID);
 ALTER TABLE ProjectStatusHistory ADD FOREIGN KEY(StatusID) REFERENCES Status(StatusID);
 
