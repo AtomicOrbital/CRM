@@ -93,3 +93,7 @@ ALTER TABLE TaskStatusHistory ADD FOREIGN KEY(StatusID) REFERENCES Status(Status
 
 INSERT INTO Users(email, password) VALUES ("username@gmail.com", "12345678");
 INSERT INTO Users(email, password) VALUES ("password@gmail.com", "12345");
+
+INSERT INTO Roles(RoleName, Description) VALUES ("Nguyen Van A", "ADMIN");
+
+
