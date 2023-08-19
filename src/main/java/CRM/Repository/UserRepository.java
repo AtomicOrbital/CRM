@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import CRM.config.MysqlConfig;
 import ProjectCRM.Model.User;
 
+import ProjectCRM.Model.Role;
 import java.util.*;
 public class UserRepository {
 	public static List<User> checkLogin(String email, String password) 
@@ -20,7 +21,10 @@ public class UserRepository {
 		try {
 			connection = MysqlConfig.connect();
 			
-			String selectUser = "SELECT * FROM Users WHERE email =  ? and password = ?";
+			String selectUser = "SELECT *"
+					+ "FROM Users "
+					+ "JOIN Roles r ON r.RoleID = Users.RoleID\n"
+					+ "WHERE email = ? AND password = ?";
 			preparedStatement = connection.prepareStatement(selectUser);
 			// Truyền tham số vào câu query nếu có
 			preparedStatement.setString(1, email);
@@ -29,11 +33,16 @@ public class UserRepository {
 			// ExecuteQuery: Khi câu truy vấn là select
 			//ExecuteUpdate: Không phải là câu lấy dữ liệu INSERT,DELETE,UPDATE
 			resultSet = preparedStatement.executeQuery();
-			
+				
 			if(resultSet.next()) {
 				user = new User();
 				user.setEmail(resultSet.getString("email"));
 				user.setPassword(resultSet.getString("password"));
+				
+				Role role = new Role();
+				role.setRoleName(resultSet.getString("roleName"));
+				user.setRole(role);
+				
 				users.add(user);
 			} 
 		} catch(SQLException e) {

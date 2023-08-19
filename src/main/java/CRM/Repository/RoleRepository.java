@@ -14,7 +14,7 @@ public class RoleRepository {
 	
 	public List<Role>getAllRoles(){
 		List<Role> roles = new ArrayList<>();
-		String selectRoles = "SELECT RoleID, RoleName, Description FROM Roles";
+		String selectRoles = "SELECT * FROM Roles";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;

@@ -99,7 +99,7 @@
 					<li><a href="user-table.html" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
-					<li><a href="role-table.html" class="waves-effect"><i
+					<li><a href="<c:url value="/role-table"/>" class="waves-effect"><i
 							class="fa fa-modx fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Quyền</span></a></li>
 					<li><a href="groupwork.html" class="waves-effect"><i
@@ -126,7 +126,7 @@
 						<h4 class="page-title">Danh sách quyền</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="role-add.html" class="btn btn-sm btn-success">Thêm
+						<a href="<c:url value="/roles"/>" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
 					<!-- /.col-lg-12 -->

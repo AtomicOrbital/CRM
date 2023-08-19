@@ -78,7 +78,7 @@
                                 <li><a href="profile.html">Thông tin cá nhân</a></li>
                                 <li><a href="#">Thống kê công việc</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Đăng xuất</a></li>
+                                <li><a href="<c:url value="/logout" />" >Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>
@@ -93,7 +93,7 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.jsp" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="<c:url value="/RoleTable"/>"  class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
@@ -101,7 +101,7 @@
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="<c:url value="/role-table.jsp"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="<c:url value="/role-table"/>" class="waves-effect"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>

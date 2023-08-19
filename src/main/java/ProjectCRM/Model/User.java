@@ -1,8 +1,10 @@
 package ProjectCRM.Model;
 
+
 public class User {
 	private String email;
 	private String password;
+	private Role role;
 	
 	public User() {
 		
@@ -12,6 +14,14 @@ public class User {
 		
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getEmail() {

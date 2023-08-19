@@ -9,7 +9,7 @@ CREATE TABLE Users(
     Fullname varchar(255),
     Address varchar(255),
     Phone varchar(10),
-    RoleID int,
+    RoleID int not null,
     index idx_role(RoleID)
 );
 
@@ -93,7 +93,20 @@ ALTER TABLE TaskStatusHistory ADD FOREIGN KEY(StatusID) REFERENCES Status(Status
 
 INSERT INTO Users(email, password) VALUES ("username@gmail.com", "12345678");
 INSERT INTO Users(email, password) VALUES ("password@gmail.com", "12345");
+INSERT INTO Users(email, password) VALUES ("abc@gmail.com", "12345");
 
 INSERT INTO Roles(RoleName, Description) VALUES ("Nguyen Van A", "ADMIN");
+
+DELETE FROM Roles WHERE RoleID  = 10; 
+
+SELECT *
+FROM Users 
+JOIN Roles r on Users.RoleID = r.RoleID 
+WHERE Users.email = "abc@gmail.com" AND Users.password = "12345";
+
+SELECT * FROM Users WHERE email = "abc@gmail.com";
+SELECT * FROM Roles;
+
+
 
 

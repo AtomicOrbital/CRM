@@ -3,7 +3,7 @@ package ProjectCRM.Controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +24,7 @@ public class LoginController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		try {
-			User users = userService.authenticateUser(email, password);
+			User users = userService.authenticateUser(request,email, password);
 			if(users != null) {
 				
 				String encodeEmail = URLEncoder.encode(users.getEmail(), "UTF-8");

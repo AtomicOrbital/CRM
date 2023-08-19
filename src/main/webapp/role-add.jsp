@@ -77,7 +77,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="<c:url value="/logout"/>">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -97,7 +97,7 @@
 					<li><a href="user-table.html" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
-					<li><a href="role-table.html" class="waves-effect"><i
+					<li><a href="<c:url value="/role-table"/>"  class="waves-effect"><i
 							class="fa fa-modx fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Quyền</span></a></li>
 					<li><a href="groupwork.html" class="waves-effect"><i
@@ -148,7 +148,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<button type="submit" class="btn btn-success">Add Role</button>
-										<a href="role-table.html" class="btn btn-primary">Quay lại</a>
+										<a href="<c:url value="/role-table" />" class="btn btn-primary">Quay lại</a>
 									</div>
 								</div>
 								<c:if test="${messages != null}">
