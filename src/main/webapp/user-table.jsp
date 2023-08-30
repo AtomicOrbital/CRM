@@ -76,7 +76,7 @@
 								class="hidden-xs">Welcome</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.jsp">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile.jsp"></c:url>">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="/logout" />">Đăng xuất</a></li>
@@ -99,10 +99,10 @@
 					<li><a href="<c:url value="/user-table" />" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
-					<li><a href="<c:url value="/role-table"/>" class="waves-effect"><i
+					<li><a href="<c:url value="/role-table" />" class="waves-effect"><i
 							class="fa fa-modx fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Quyền</span></a></li>
-					<li><a href="<c:url value="/get-projects" />" class="waves-effect"><i
+					<li><a href="<c:url value="/get-projects" /> class="waves-effect"><i
 							class="fa fa-table fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Dự án</span></a></li>
 					<li><a href="task.jsp" class="waves-effect"><i
@@ -123,11 +123,11 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách quyền</h4>
+						<h4 class="page-title">Danh sách thành viên</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="<c:url value="/role-add"/>" class="btn btn-sm btn-success">Thêm
-							mới</a>
+						<a href="<c:url value="user-add.jsp" />"
+							class="btn btn-sm btn-success">Thêm mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
@@ -140,26 +140,36 @@
 									<thead>
 										<tr>
 											<th>STT</th>
-											<th>Tên Quyền</th>
-											<th>Mô Tả</th>
-											<th>Hành Động</th>
+											<th>Email</th>
+											<th>Password</th>
+											<th>Full Name</th>
+											<th>Address</th>
+											<th>Phone</th>
+											<th>Role Name</th>
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="role" items="${rolesList}">
-											<tr>
-												<td>${role.roleID}</td>
-												<td>${role.roleName}</td>
-												<td>${role.description}</td>
-												<td>
-												<a href="#"											
-													class="btn btn-sm btn-primary btn-sua">Sửa</a>
-												<a href="#" id-role="${role.roleID}" 
-													class="btn btn-sm btn-danger btn-xoa">Xóa</a>
+
+										<c:forEach var="user" items="${users}">
+											<tr id="user-${user.id}">
+												<td>${user.id}</td>
+												<td>${user.email}</td>
+												<td>${user.password}</td>
+												<td>${user.fullName}</td>
+												<td>${user.address}</td>
+												<td>${user.phone}</td>
+												<td>${user.role.roleName}</td>
+												<td><a data-id="${user.id}" href="#"
+													class="btn btn-sm btn-primary btn-edit">Sửa</a> 
+													<a
+													data-id="${user.id}" href="#"
+													class="btn btn-sm btn-danger delete-user-btn">Xóa</a> 
+													<a
+													href="user-details.html" class="btn btn-sm btn-info">Xem</a>
 												</td>
 											</tr>
 										</c:forEach>
-										 
 									</tbody>
 								</table>
 							</div>
@@ -174,75 +184,111 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
-	<!-- ROLE MODAL -->
-	<div id="exampleModal" class="modal fade" role="dialog">
+	<!-- MODAL  -->
+	<div id="editUserModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Chỉnh sửa thông tin role</h4>
+					<h4 class="modal-title">Chỉnh sửa thông tin user</h4>
 				</div>
 				<div class="modal-body">
 					<div class="white-box">
 						<form id="editUserForm" class="form-horizontal form-material">
 							<div class="form-group">
-								<label class="col-md-12">RoleID</label>
+								<label class="col-md-12">UserID</label>
 								<div class="col-md-12">
 									<input type="text" placeholder=""
-										class="form-control form-control-line roleId"
+										class="form-control form-control-line userId"
 										readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-12">RoleName</label>
-								<div class="col-sm-12">
-									<input type="text" placeholder="" 
-									class="form-control form-control-line roleName"/>
+								<label class="col-md-12">Email</label>
+								<div class="col-md-12">
+									<input type="email" placeholder=""
+										class="form-control form-control-line editEmail"
+										name="example-email">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12">Description</label>
+								<label class="col-md-12">Password</label>
 								<div class="col-md-12">
-									<input type="text" value="text"
-										class="form-control form-control-line description">
+									<input type="password" value="password"
+										class="form-control form-control-line editPassword">
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label class="col-md-12">Full Name</label>
+								<div class="col-md-12">
+									<input type="text" placeholder=""
+										class="form-control form-control-line editFullName">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12">Phone Number</label>
+								<div class="col-md-12">
+									<input type="text" placeholder=""
+										class="form-control form-control-line editPhone">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-12">Select Country</label>
+								<div class="col-sm-12">
+									<select class="form-control form-control-line editAddress">
+										<option>London</option>
+										<option>India</option>
+										<option>VietNam</option>
+										<option>Canada</option>
+										<option>Thailand</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-12">Select Role</label>
+								<div class="col-sm-12">
+									<select class="form-control form-control-line editRole">
+										<option value="1">ADMIN</option>
+										<option value="2">USER</option>
+										<option value="3">LEADER</option>
+									</select>
+								</div>
+							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-						<button type="submit" class="btn btn-primary" id="updateRole">Lưu
+						<button type="submit" class="btn btn-primary" id="updateUser">Lưu
 							thay đổi</button>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
-	<!-- /#wrapper -->
-	<!-- jQuery -->
-	<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Menu Plugin JavaScript -->
-	<script
-		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-	<!--slimscroll JavaScript -->
-	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
-	<!--Wave Effects -->
-	<script src="js/waves.js"></script>
-	<!-- Custom Theme JavaScript -->
-	<script src="js/custom.min.js"></script>
-	<!-- MAIN JS -->
-	<script src="js/DeleteRole.js"></script>
-	<script src="js/UpdateRole.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
+		<!-- /#wrapper -->
+		<!-- jQuery -->
+		<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- Menu Plugin JavaScript -->
+		<script
+			src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+		<!--slimscroll JavaScript -->
+		<script src="js/jquery.slimscroll.js"></script>
+		<script src="js/jquery.dataTables.js"></script>
+		<!--Wave Effects -->
+		<script src="js/waves.js"></script>
+		<!-- Custom Theme JavaScript -->
+		<script src="js/custom.min.js"></script>
+		<script src="js/DeleteUser.js"></script>
+		<script src="js/UpdateUser.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#example').DataTable();
+			});
+		</script>
 </body>
 
 </html>

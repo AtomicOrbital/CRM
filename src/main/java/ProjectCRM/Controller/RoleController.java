@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ProjectCRM.Model.Role;
 import CRM.Service.RoleService;
-@WebServlet(name = "RoleController", urlPatterns = {"/roles", "/role-table"})
+@WebServlet(name = "RoleController", urlPatterns = {"/role-add", "/role-table"})
 
 public class RoleController extends HttpServlet {
 	private RoleService roleService = new RoleService();
@@ -18,7 +18,7 @@ public class RoleController extends HttpServlet {
 			throws ServletException, IOException {
 		String path = request.getServletPath();
 		
-		if("/roles".equals(path)) {		
+		if("/role-add".equals(path)) {		
 			request.getRequestDispatcher("role-add.jsp").forward(request, response);
 		} else if("/role-table".equals(path)) {
 			List<Role> roles = roleService.getAllRoles();
@@ -31,7 +31,7 @@ public class RoleController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {	
 		String path = request.getServletPath(); // lấy đường dẫn yêu cầu
-		if("/roles".equals(path)) {
+		if("/role-add".equals(path)) {
 			response.setContentType("text/html; charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			

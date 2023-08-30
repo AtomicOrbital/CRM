@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import CRM.Repository.UserRepository;
+
 public class UserService {
 	
 	public User authenticateUser(HttpServletRequest request,String email, String password) 
@@ -22,5 +23,21 @@ public class UserService {
 			return user;
 		}
 		return null;
+	}
+	
+	public List<User> getAllUsersWithRoles(){
+		return UserRepository.getAllUsersWithRoles();
+	}
+	
+	public boolean addUser(User user) {
+		return UserRepository.insertUser(user);
+	}
+	
+	public boolean updateUser(User user) {
+		return UserRepository.updateUser(user);
+	}
+	
+	public boolean deleteUser(int userId) {
+		return UserRepository.deleteUser(userId);
 	}
 }

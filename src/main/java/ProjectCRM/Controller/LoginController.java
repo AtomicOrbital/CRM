@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import CRM.Repository.UserRepository;
 import CRM.Service.UserService;
@@ -47,7 +48,9 @@ public class LoginController extends HttpServlet {
 				// thêm cookie vào phản hồi
 				response.addCookie(emailCookie);
 				response.addCookie(passwordCookie);
-				System.out.println("User " + users.getEmail() + " logged is successfully");
+//				System.out.println("User " + users.getEmail() + " logged is successfully");
+
+
 				response.sendRedirect("index.jsp");
 			} else {
 				System.out.println("Failed login for email: " + email);

@@ -29,12 +29,19 @@
 <!-- color CSS -->
 <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
 <link rel="stylesheet" href="./css/custom.css">
+<style>
+/* table {
+    		table-layout: fixed;
+    		width: 100%;
+		} */
+</style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
 
 <body>
@@ -76,7 +83,7 @@
 								class="hidden-xs">Welcome</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.jsp">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile.jsp" />">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="/logout" />">Đăng xuất</a></li>
@@ -99,7 +106,7 @@
 					<li><a href="<c:url value="/user-table" />" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
-					<li><a href="<c:url value="/role-table"/>" class="waves-effect"><i
+					<li><a href="<c:url value="/role-table" />" class="waves-effect"><i
 							class="fa fa-modx fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Quyền</span></a></li>
 					<li><a href="<c:url value="/get-projects" />" class="waves-effect"><i
@@ -123,10 +130,10 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách quyền</h4>
+						<h4 class="page-title">Danh sách công việc</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="<c:url value="/role-add"/>" class="btn btn-sm btn-success">Thêm
+						<a href="<c:url value="/add-tasks" />" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -140,26 +147,17 @@
 									<thead>
 										<tr>
 											<th>STT</th>
-											<th>Tên Quyền</th>
-											<th>Mô Tả</th>
+											<th>Tên Công Việc</th>
+											<th>Dự Án</th>
+											<th>Người Thực Hiện</th>
+											<th>Ngày Bắt Đầu</th>
+											<th>Ngày Kết Thúc</th>
+											<th>Trạng Thái</th>
 											<th>Hành Động</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="role" items="${rolesList}">
-											<tr>
-												<td>${role.roleID}</td>
-												<td>${role.roleName}</td>
-												<td>${role.description}</td>
-												<td>
-												<a href="#"											
-													class="btn btn-sm btn-primary btn-sua">Sửa</a>
-												<a href="#" id-role="${role.roleID}" 
-													class="btn btn-sm btn-danger btn-xoa">Xóa</a>
-												</td>
-											</tr>
-										</c:forEach>
-										 
+
 									</tbody>
 								</table>
 							</div>
@@ -174,49 +172,87 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
-	<!-- ROLE MODAL -->
-	<div id="exampleModal" class="modal fade" role="dialog">
+	<!-- MODAL  -->
+	<div id="editTaskModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Chỉnh sửa thông tin role</h4>
+					<h4 class="modal-title">Chỉnh sửa thông tin task</h4>
 				</div>
 				<div class="modal-body">
 					<div class="white-box">
-						<form id="editUserForm" class="form-horizontal form-material">
+						<form id="editTaskForm" class="form-horizontal form-material">
 							<div class="form-group">
-								<label class="col-md-12">RoleID</label>
+								<label class="col-md-12">TaskID</label>
 								<div class="col-md-12">
 									<input type="text" placeholder=""
-										class="form-control form-control-line roleId"
-										readonly>
+										class="form-control form-control-line userId" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-12">RoleName</label>
-								<div class="col-sm-12">
-									<input type="text" placeholder="" 
-									class="form-control form-control-line roleName"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-12">Description</label>
+								<label class="col-md-12">TaskName</label>
 								<div class="col-md-12">
-									<input type="text" value="text"
-										class="form-control form-control-line description">
+									<input type="text" placeholder=""
+										class="form-control form-control-line editTaskName"
+										name="example-email">
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label class="col-md-12">StartDate</label>
+								<div class="col-md-12">
+									<input type="text"
+										class="form-control form-control-line editStartDate">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12">EndDate</label>
+								<div class="col-md-12">
+									<input type="text" placeholder=""
+										class="form-control form-control-line editEndDate">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-12">ExecutorName</label>
+								<div class="col-md-12">
+									<select id="editExecutorId"
+										class="form-control form-control-line ">
+										<option class="editExecutorName" value="1"
+											data-name="Executor 1">Executor 1</option>
+										<!-- <option value="2" data-name="Executor 2"></option> -->
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-12">ProjectName</label>
+								<div class="col-sm-12">
+									<select id="editProjectId"
+										class="form-control form-control-line">
+										<option class="editProjectName"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-12">Status</label>
+								<div class="col-sm-12">
+									<select id="editStatusId"
+										class="form-control form-control-line ">
+										<option class="editStatusName"></option>
+									</select>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Đóng</button>
+								<button type="submit" class="btn btn-primary" id="updateTask">Lưu
+									thay đổi</button>
+							</div>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-						<button type="submit" class="btn btn-primary" id="updateRole">Lưu
-							thay đổi</button>
-					</div>
+
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -230,14 +266,14 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="js/custom.min.js"></script>
-	<!-- MAIN JS -->
-	<script src="js/DeleteRole.js"></script>
-	<script src="js/UpdateRole.js"></script>
+	<script src="js/GetTask.js"></script>
+	<script src="js/DeleteTask.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#example').DataTable();

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName =  "/CustomerFilter", urlPatterns = {"/roles"})
+@WebFilter(filterName =  "/CustomerFilter", urlPatterns = {"/role-table"})
 public class CustomerFilter extends HttpFilter {
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) 

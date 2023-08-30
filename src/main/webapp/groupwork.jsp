@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +54,7 @@
 					data-target=".navbar-collapse"> <i class="fa fa-bars"></i>
 				</a>
 				<div class="top-left-part">
-					<a class="logo" href="index.jsp"> <b> <img
+					<a class="logo" href="index.html"> <b> <img
 							src="plugins/images/pixeladmin-logo.png" alt="home" />
 					</b> <span class="hidden-xs"> <img
 							src="plugins/images/pixeladmin-text.png" alt="home" />
@@ -76,10 +79,10 @@
 								class="hidden-xs">Welcome</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.jsp">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile.jsp" />">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="<c:url value="/logout" />">Đăng xuất</a></li>
+								<li><a href='<c:url value="/logout" />'>Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -99,13 +102,13 @@
 					<li><a href="<c:url value="/user-table" />" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
-					<li><a href="<c:url value="/role-table"/>" class="waves-effect"><i
+					<li><a href="<c:url value="/role-table" />" class="waves-effect"><i
 							class="fa fa-modx fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Quyền</span></a></li>
 					<li><a href="<c:url value="/get-projects" />" class="waves-effect"><i
 							class="fa fa-table fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Dự án</span></a></li>
-					<li><a href="task.jsp" class="waves-effect"><i
+					<li><a href="<c:url value="/task.jsp" />" class="waves-effect"><i
 							class="fa fa-table fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Công việc</span></a></li>
 					<li><a href="blank.html" class="waves-effect"><i
@@ -123,10 +126,10 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách quyền</h4>
+						<h4 class="page-title">Danh sách dự án</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="<c:url value="/role-add"/>" class="btn btn-sm btn-success">Thêm
+						<a href="<c:url value="/add-project" />" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -140,26 +143,27 @@
 									<thead>
 										<tr>
 											<th>STT</th>
-											<th>Tên Quyền</th>
-											<th>Mô Tả</th>
+											<th>Tên Dự Án</th>
+											<th>Ngày Bắt Đầu</th>
+											<th>Ngày Kết Thúc</th>
 											<th>Hành Động</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="role" items="${rolesList}">
-											<tr>
-												<td>${role.roleID}</td>
-												<td>${role.roleName}</td>
-												<td>${role.description}</td>
-												<td>
-												<a href="#"											
-													class="btn btn-sm btn-primary btn-sua">Sửa</a>
-												<a href="#" id-role="${role.roleID}" 
-													class="btn btn-sm btn-danger btn-xoa">Xóa</a>
+										<c:forEach var="item" items="${projects}">
+											<tr id="project-${item.projectId}">
+												<td>${item.projectId}</td>
+												<td>${item.projectName}</td>
+												<td><fmt:formatDate value="${item.startDate}"
+														pattern="dd-MM-yyyy" /></td>
+												<td><fmt:formatDate value="${item.endDate}"
+														pattern="dd-MM-yyyy" /></td>
+												<td><a href="#" class="btn btn-sm btn-primary edit-project">Sửa</a>
+													<a href="#" data-id="${item.projectId}" class="btn btn-sm btn-danger delete-user-btn">Xóa</a> <a
+													href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
 												</td>
 											</tr>
 										</c:forEach>
-										 
 									</tbody>
 								</table>
 							</div>
@@ -174,53 +178,59 @@
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
-	<!-- ROLE MODAL -->
-	<div id="exampleModal" class="modal fade" role="dialog">
+	<!-- /#wrapper -->
+
+	<!-- MODAL -->
+	<div id="projectModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Chỉnh sửa thông tin role</h4>
+					<h4 class="modal-title">Chỉnh sửa thông tin project</h4>
 				</div>
 				<div class="modal-body">
 					<div class="white-box">
 						<form id="editUserForm" class="form-horizontal form-material">
 							<div class="form-group">
-								<label class="col-md-12">RoleID</label>
+								<label class="col-md-12">ProjectId</label>
 								<div class="col-md-12">
 									<input type="text" placeholder=""
-										class="form-control form-control-line roleId"
-										readonly>
+										class="form-control form-control-line editProjectId" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-12">RoleName</label>
+								<label class="col-sm-12">ProjectName</label>
 								<div class="col-sm-12">
-									<input type="text" placeholder="" 
-									class="form-control form-control-line roleName"/>
+									<input type="text" placeholder=""
+										class="form-control form-control-line editProjectName" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-12">Description</label>
+								<label class="col-md-12">StartDate</label>
 								<div class="col-md-12">
 									<input type="text" value="text"
-										class="form-control form-control-line description">
+										class="form-control form-control-line editStartDate">
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label class="col-md-12">EndDate</label>
+								<div class="col-md-12">
+									<input type="type" value="text"
+										class="form-control form-control-line editEndDate">
+								</div>
+							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-						<button type="submit" class="btn btn-primary" id="updateRole">Lưu
+						<button type="submit" class="btn btn-primary" id="updateProject">Lưu
 							thay đổi</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- /#wrapper -->
 	<!-- jQuery -->
 	<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap Core JavaScript -->
@@ -230,14 +240,14 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="js/custom.min.js"></script>
-	<!-- MAIN JS -->
-	<script src="js/DeleteRole.js"></script>
-	<script src="js/UpdateRole.js"></script>
+	<script type="text/javascript" src="js/UpdateProject.js"></script>
+	<script src="js/DeleteProject.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#example').DataTable();
